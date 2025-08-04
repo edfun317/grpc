@@ -4,7 +4,7 @@
 // 	protoc        v5.29.3
 // source: proto/greeter.proto
 
-package proto
+package protos
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -26,6 +26,7 @@ type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Language      *string                `protobuf:"bytes,3,opt,name=language,proto3,oneof" json:"language,omitempty"` // Optional field for language preference
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -74,11 +75,19 @@ func (x *HelloRequest) GetMessage() string {
 	return ""
 }
 
+func (x *HelloRequest) GetLanguage() string {
+	if x != nil && x.Language != nil {
+		return *x.Language
+	}
+	return ""
+}
+
 // The response message containing the greetings
 type HelloReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	Timestamp     int64                  `protobuf:"varint,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Language      *string                `protobuf:"bytes,3,opt,name=language,proto3,oneof" json:"language,omitempty"` // Optional field for language preference
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,23 +136,35 @@ func (x *HelloReply) GetTimestamp() int64 {
 	return 0
 }
 
+func (x *HelloReply) GetLanguage() string {
+	if x != nil && x.Language != nil {
+		return *x.Language
+	}
+	return ""
+}
+
 var File_proto_greeter_proto protoreflect.FileDescriptor
 
 const file_proto_greeter_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/greeter.proto\x12\x05proto\"<\n" +
+	"\x13proto/greeter.proto\x12\fcom.jj.proto\"j\n" +
 	"\fHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"D\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x1f\n" +
+	"\blanguage\x18\x03 \x01(\tH\x00R\blanguage\x88\x01\x01B\v\n" +
+	"\t_language\"r\n" +
 	"\n" +
 	"HelloReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x1c\n" +
-	"\ttimestamp\x18\x02 \x01(\x03R\ttimestamp2\xeb\x01\n" +
-	"\aGreeter\x124\n" +
-	"\bSayHello\x12\x13.proto.HelloRequest\x1a\x11.proto.HelloReply\"\x00\x127\n" +
-	"\tSayHellos\x12\x13.proto.HelloRequest\x1a\x11.proto.HelloReply\"\x000\x01\x12;\n" +
-	"\rReceiveHellos\x12\x13.proto.HelloRequest\x1a\x11.proto.HelloReply\"\x00(\x01\x124\n" +
-	"\x04Chat\x12\x13.proto.HelloRequest\x1a\x11.proto.HelloReply\"\x00(\x010\x01B\tZ\a.;protob\x06proto3"
+	"\ttimestamp\x18\x02 \x01(\x03R\ttimestamp\x12\x1f\n" +
+	"\blanguage\x18\x03 \x01(\tH\x00R\blanguage\x88\x01\x01B\v\n" +
+	"\t_language2\xa3\x02\n" +
+	"\aGreeter\x12B\n" +
+	"\bSayHello\x12\x1a.com.jj.proto.HelloRequest\x1a\x18.com.jj.proto.HelloReply\"\x00\x12E\n" +
+	"\tSayHellos\x12\x1a.com.jj.proto.HelloRequest\x1a\x18.com.jj.proto.HelloReply\"\x000\x01\x12I\n" +
+	"\rReceiveHellos\x12\x1a.com.jj.proto.HelloRequest\x1a\x18.com.jj.proto.HelloReply\"\x00(\x01\x12B\n" +
+	"\x04Chat\x12\x1a.com.jj.proto.HelloRequest\x1a\x18.com.jj.proto.HelloReply\"\x00(\x010\x01B\n" +
+	"Z\b.;protosb\x06proto3"
 
 var (
 	file_proto_greeter_proto_rawDescOnce sync.Once
@@ -159,18 +180,18 @@ func file_proto_greeter_proto_rawDescGZIP() []byte {
 
 var file_proto_greeter_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_greeter_proto_goTypes = []any{
-	(*HelloRequest)(nil), // 0: proto.HelloRequest
-	(*HelloReply)(nil),   // 1: proto.HelloReply
+	(*HelloRequest)(nil), // 0: com.jj.proto.HelloRequest
+	(*HelloReply)(nil),   // 1: com.jj.proto.HelloReply
 }
 var file_proto_greeter_proto_depIdxs = []int32{
-	0, // 0: proto.Greeter.SayHello:input_type -> proto.HelloRequest
-	0, // 1: proto.Greeter.SayHellos:input_type -> proto.HelloRequest
-	0, // 2: proto.Greeter.ReceiveHellos:input_type -> proto.HelloRequest
-	0, // 3: proto.Greeter.Chat:input_type -> proto.HelloRequest
-	1, // 4: proto.Greeter.SayHello:output_type -> proto.HelloReply
-	1, // 5: proto.Greeter.SayHellos:output_type -> proto.HelloReply
-	1, // 6: proto.Greeter.ReceiveHellos:output_type -> proto.HelloReply
-	1, // 7: proto.Greeter.Chat:output_type -> proto.HelloReply
+	0, // 0: com.jj.proto.Greeter.SayHello:input_type -> com.jj.proto.HelloRequest
+	0, // 1: com.jj.proto.Greeter.SayHellos:input_type -> com.jj.proto.HelloRequest
+	0, // 2: com.jj.proto.Greeter.ReceiveHellos:input_type -> com.jj.proto.HelloRequest
+	0, // 3: com.jj.proto.Greeter.Chat:input_type -> com.jj.proto.HelloRequest
+	1, // 4: com.jj.proto.Greeter.SayHello:output_type -> com.jj.proto.HelloReply
+	1, // 5: com.jj.proto.Greeter.SayHellos:output_type -> com.jj.proto.HelloReply
+	1, // 6: com.jj.proto.Greeter.ReceiveHellos:output_type -> com.jj.proto.HelloReply
+	1, // 7: com.jj.proto.Greeter.Chat:output_type -> com.jj.proto.HelloReply
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -183,6 +204,8 @@ func file_proto_greeter_proto_init() {
 	if File_proto_greeter_proto != nil {
 		return
 	}
+	file_proto_greeter_proto_msgTypes[0].OneofWrappers = []any{}
+	file_proto_greeter_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/greeter.proto
 
-package proto
+package protos
 
 import (
 	context "context"
@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Greeter_SayHello_FullMethodName      = "/proto.Greeter/SayHello"
-	Greeter_SayHellos_FullMethodName     = "/proto.Greeter/SayHellos"
-	Greeter_ReceiveHellos_FullMethodName = "/proto.Greeter/ReceiveHellos"
-	Greeter_Chat_FullMethodName          = "/proto.Greeter/Chat"
+	Greeter_SayHello_FullMethodName      = "/com.jj.proto.Greeter/SayHello"
+	Greeter_SayHellos_FullMethodName     = "/com.jj.proto.Greeter/SayHellos"
+	Greeter_ReceiveHellos_FullMethodName = "/com.jj.proto.Greeter/ReceiveHellos"
+	Greeter_Chat_FullMethodName          = "/com.jj.proto.Greeter/Chat"
 )
 
 // GreeterClient is the client API for Greeter service.
@@ -208,7 +208,7 @@ type Greeter_ChatServer = grpc.BidiStreamingServer[HelloRequest, HelloReply]
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Greeter_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.Greeter",
+	ServiceName: "com.jj.proto.Greeter",
 	HandlerType: (*GreeterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
